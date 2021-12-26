@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-flatpak-builder build-dir org.flatpak.Hello.yml
+flatpak-builder --user --install --force-clean build-dir org.flatpak.Hello.yml
