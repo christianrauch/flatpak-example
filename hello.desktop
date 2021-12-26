@@ -1,0 +1,8 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Name=Hello Flatpak
+Terminal=true
+Exec=hello.sh
+Icon=org.flatpak.Hello
+Categories=Utility

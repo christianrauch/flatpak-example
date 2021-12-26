@@ -3,6 +3,8 @@ runtime: org.freedesktop.Platform
 runtime-version: '21.08'
 sdk: org.freedesktop.Sdk
 command: hello.sh
+rename-desktop-file: hello.desktop
+# rename-icon: icon1
 modules:
   - name: hello
     buildsystem: simple
@@ -11,3 +13,31 @@ modules:
     sources:
       - type: file
         path: hello.sh
+
+  - name: launcher
+    sources:
+    - type: file
+      path: hello.desktop
+    - type: file
+      path: icon1.svg
+    buildsystem: simple
+    build-commands:
+    # launcher
+    - install -d /app/share/applications
+    - install -m644 hello.desktop /app/share/applications/hello.desktop
+
+    # icon
+
+    # no warnings, but no icon shown
+    # - install -d /app/share/icons/hicolor/apps
+    # - install -m644 icon1.svg /app/share/icons/hicolor/apps/org.flatpak.Hello.svg
+
+    # WARNING: Icon referenced in desktop file but not exported: org.flatpak.Hello
+    # but icon is visible
+    - install -d /app/share/icons
+    - install -m644 icon1.svg /app/share/icons/org.flatpak.Hello.svg
+
+    # ERROR, using "rename-icon: icon1"
+    # Error: icon icon1.svg not found below [...]/.flatpak-builder/rofiles/rofiles-4EnzPk/files/share/icons
+    # - install -d /app/share/icons/hicolor/apps
+    # - install -m644 icon1.svg /app/share/icons/hicolor/apps/icon1.svg
